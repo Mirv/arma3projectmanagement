@@ -4,7 +4,7 @@ class MAR
     class functions
     {
       file = "functions";
-      class weaponNames { Description = "This grabs the functions from the folder"; };
+      class weaponNames { Description = "Get the weapon class & name from the weapon config file."; };  
 	};
 
 }
