@@ -9,6 +9,11 @@ if (!_isJIP) then
   systemchat "Starting weapon detection script - In not JIP";
 };
 
-private _result = [_player] call MaR_fnc_weaponNames;
+// private _result = [_player] call MAR_fnc_weaponNames;
+// systemchat (_result select 1);
+// systemchat ( format ["Is the player in a vehicle? %1", (_result select 2)]);
+
+
+
 
 systemchat "Ending weapon detection script";
