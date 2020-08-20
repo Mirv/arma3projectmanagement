@@ -25,10 +25,4 @@ thisCall = format ["2:myP:%1", thisQuery];
 thisResult = "extDB3" callExtension thisCall;
 "extDB3" callExtension "9:ADD_PROTOCOL:LOG:DEBUG:debug.log";
 
-// if(isArray thisResult) then {
-// 	if(isNil thisResult) then { thisResult = [0,0];};
-// 	if(isNull thisResult == true) then { thisResult = [0,0];};
-// } else {
-// 	systemChat "WTF?":
-// };
-// systemChat format[ "Is the result good or bad?", (thisResult select 0)];
+
