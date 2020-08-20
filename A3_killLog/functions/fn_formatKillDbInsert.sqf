@@ -15,25 +15,27 @@ params [
 	killerUID,
 	killerName,
 	killerTeam,
-	killDistance,  
 	killed_xpos, 
 	killed_yPos, 
 	killed_zPos,  
 	killer_xPos, 
 	killer_yPos, 
 	killer_zPos, 
-	weaponName, 
+	killDistance,  
 	weaponClass,	// required for addon compatibility
+	weaponName, 
 	isVehicle, 
+	vehicleClass,	// required for addon compatibility
 	vehicleName, 	
 	gameTime		// seconds since server started
 	];
 
 private ["_fieldList", "_valueList"];
 
-_fieldList = "killedUID, killedName, killedTeam, killerUID, killerName, killerTeam, killDistance, killed_xpos, killed_yPos, killed_zPos, killer_xPos, killer_yPos, killer_zPos, weaponName, weaponClass, isVehicle, vehicleName, gameTime";
-// _valueList = format ["%1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13, %14, %15, %16, %17, %18", params ];
-_valueList = " blah ";
+_fieldList = "killedUID, killedName, killedTeam, killerUID, killerName, killerTeam, killDistance, killed_xpos, killed_yPos, killed_zPos, killer_xPos, killer_yPos, killer_zPos, weaponName, weaponClass, isVehicle, vehicleClass, vehicleName, gameTime";
+// Feeding params as array into the format params might not work, might have to map/forEach or other string combine
+_valueList = format ["%1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13, %14, %15, %16, %17, %18", params ];
+// _valueList = " blah ";
 
 _query = format ["INSERT INTO killlog ( %1 ) VALUES ( %2 );", _fieldList, _valueList];
 
