@@ -8,37 +8,40 @@
 //		true if successfully added or false if failed
 //
 //
-params [
-	killedUID,		// note that sometimes the target is AI units 
-	killedName, 
-	killedTeam,
-	killerUID,
-	killerName,
-	killerTeam,
-	killed_xpos, 
-	killed_yPos, 
-	killed_zPos,  
-	killer_xPos, 
-	killer_yPos, 
-	killer_zPos, 
-	killDistance,  
-	weaponClass,	// required for addon compatibility
-	weaponName, 
-	isVehicle, 
-	vehicleClass,	// required for addon compatibility
-	vehicleName, 	
-	gameTime		// seconds since server started
-	];
 
-private ["_fieldList", "_valueList"];
+#define FIELDLIST "killedUID, killedName, killedTeam, killerUID, killerName, killerTeam, killDistance, killed_xpos, killed_yPos, killed_zPos, killer_xPos, killer_yPos, killer_zPos, weaponName, weaponClass, isVehicle, vehicleClass, vehicleName, gameTime"
 
+private ["_fieldList", "_valueList", "_theHandle"];
+
+_theHandle = params [
+	"_killedUID",
+	"_killedName",
+	"_killedTeam",
+	"_killerUID",
+	"_killerName",
+	"_killerTeam",
+	"_killed_xpos",
+	"_killed_yPos",
+	"_killed_zPos",
+	"_killer_xPos",
+	"_killer_yPos",
+	"_killer_zPos",
+	"_killDistance",
+	"_weaponClass",
+	"_weaponName",
+	"_isVehicle",
+	"_vehicleClass",
+	"_vehicleName",
+	"_gameTime"
+];
+
+
+// TODO - fieldList could easily be a macro for preprocessing
 _fieldList = "killedUID, killedName, killedTeam, killerUID, killerName, killerTeam, killDistance, killed_xpos, killed_yPos, killed_zPos, killer_xPos, killer_yPos, killer_zPos, weaponName, weaponClass, isVehicle, vehicleClass, vehicleName, gameTime";
-// Feeding params as array into the format params might not work, might have to map/forEach or other string combine
-_valueList = format ["%1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13, %14, %15, %16, %17, %18", params ];
-// _valueList = " blah ";
+// _valueList = (format ["%1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13, %14, %15, %16, %17, %18", _this ]);
+_valueList = _this joinString ", ";
 
-_query = format ["INSERT INTO killlog ( %1 ) VALUES ( %2 );", _fieldList, _valueList];
+format ["INSERT INTO killlog ( %1 ) VALUES ( %2 );", _fieldList, _valueList];
 
-
-
-
+//  Called with:   ["1", "2"] call MAR_fnc_formatKillDbInsert;
+//  Returns:   "INSERT INTO killlog ( killedUID, killedName, killedTeam, ... gameTime ) VALUES ( 1, 2 );"

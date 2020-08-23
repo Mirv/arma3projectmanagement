@@ -19,28 +19,30 @@
 //		We need both weapon & vehicle as shooting from truck bed
 //      
 
-
 params ["_player"];
 
 private ["_weaponName", "_weaponClass", "_isVehicle", "_vehicleClass", "_vehicleName"];
 
 // Get the weapon class & display name to help with mod/mission compability
+// systemChat format ["objectParent null? %1",(isNull objectParent _player)];
+// systemChat format ["vehiclePlayer: %1",(vehicle _player)];
 
 if (isNull objectParent _player) then {		
-	// Not in vehicle								
+	// Not in vehicle	
+	systemChat "WPNAMES: not in vehicle.";							
 	_weaponClass = currentWeapon  _player;
-	_weaponName = configfile >> "CfgWeapons" >> _weaponClass;	// Take the players currentWeapon
+	_weaponName = getText (configfile >> "CfgWeapons" >> _weaponClass >> "displayName");	// Take the players currentWeapon
 	_vehicleClass = "None";
 	_vehicleName = "None";
 	_isVehicle = false;
 } else {	
 	// In a vehicle					
-	_weaponClass = currentWeapon vehicle _player;
-	_weaponName = getText (configfile >> "CfgWeapons" >> _weaponClass >>  "displayName");	// Take the players vehicle main turrent currentWeapon
+	systemChat "WPNAMES: in vehicle.";
+	_weaponClass = (currentWeapon vehicle _player);
+	_weaponName = getText (configfile >> "CfgWeapons" >> _weaponClass >> "displayName");	// Take the players vehicle main turrent currentWeapon
 	_vehicleClass = typeOf vehicle _player;
 	_vehicleName = getText (configFile >> "cfgVehicles" >> _vehicleClass >> "displayName");
 	_isVehicle = true;
 };
-
-[_weaponClass, _weaponName, _isVehicle, _vehicleClass, _vehicleName];
-
+//c
+result = [_weaponClass, _weaponName, _isVehicle, _vehicleClass, _vehicleName];
