@@ -16,13 +16,13 @@ private [
 	"_currentServerName",
 	"_killedPos",
 	"_killerPos",
-	"_killDistance"
+	"_killDistance",
+	"_result"
 ];
 
-// Gather the data
-_currentMap = worldName;
-_currentMission = missionName;
-_currentServerName = serverName;
+_currentMap = format ["'%1'", worldName];
+_currentMission = format ["'%1'", missionName];
+_currentServerName = format ["'%1'", serverName];
 _killedPos = getPos _killed;
 _killerPos = getPos _killer;
 _killDistance = _killedPos distance _killerPos;
@@ -39,19 +39,19 @@ _killDistance = _killedPos distance _killerPos;
 
 // TODO - The returned array needs to be unpacked  & appended seperately
 
-theResult = [	
+_result = [	
 	_currentMap,
 	_currentMission,
-	_currentServerName,
-	_killDistance
+	_currentServerName
 ];
 
-// append arrays so it's a flat file
-theResult append _killedPos;
-theResult append _killerPos;
+// append arrays, rather than hand type it into result array so it's a flat file
+_result append _killedPos;
+_result append _killerPos;
+_result pushBack _killDistance;
 
 // last operations is returned, but append doesn't work with this, so assert the variable to return
-theResult
+_result;
 
 
 // Example 

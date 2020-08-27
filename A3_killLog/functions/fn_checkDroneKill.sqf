@@ -1,3 +1,7 @@
+// Needs the 2 or 3 parameters setup
+
+// Note - not in use yet or tested
+
 // We credit the instigator by default - later versions will credit the squad/vehicle crew/commander?
 // if (isNull _instigator OR (isNil name _instigator)) then {
 if (_instigator isEqualTo objNull) then {

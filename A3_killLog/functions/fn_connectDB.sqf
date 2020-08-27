@@ -1,11 +1,18 @@
-// --- Working SQF prepping database handle
 //
-// Initialize and assign the extDB connection a handle for to call too
+// - connectDB
+//		Working SQF prepping database handle
 //
-// Should probably go in the serverInit.sqf of be called from it
+// - Initialize and assign the extDB connection a handle for to call too
+//
+// - Note
+//		Should probably go in the serverInit.sqf of be called from it
 
 // TODO - it can be abstracted
-// TODO - Write a check to see that we can query against the list of bsae tables in db before we call this
+// TODO - Write a check to see that we can query against the list of base 
+//	tables in db extension? before we call this
+
+params ['_player'];
+
 
 private ["_thisDB", "_result", "_thisProtocol"];
 
@@ -16,13 +23,13 @@ _thisDB = "extDB3" callExtension "9:ADD_DATABASE:jpsDB:myDB";
 if(_thisDB isEqualTo "[1]" or _thisDB isEqualTo "[0,""Already Connected to Database""]") then {
 
 	// Attempt to create protocol handle to use for submitting queries
-	thisProtocol = "extDB3" callExtension "9:ADD_DATABASE_PROTOCOL:myDB:SQL:myProtocol";
+	_thisProtocol = "extDB3" callExtension "9:ADD_DATABASE_PROTOCOL:myDB:SQL:myProtocol";
 
 	// Checks Protocol gets set or returns it already setup
 	if(thisProtocol isEqualTo "[1]" or thisProtocol isEqualTo "[0,""Error Protocol Name Already Taken""]") then {
-		_result  = true;
+		_result = _thisProtocol;
 	} else { 
-		_result  = false;
+		_result = false;
 		"Issue making handle for protocol to use in queries - see extdb log files" call bis_fnc_log; 
 		"extDB3" callExtension "9:ADD_PROTOCOL:LOG:DEBUG:debug"; 
 		"extDB3" callExtension "1:DEBUG:Issue ADD_PROTOCOL in setupDB.sqf"; 
@@ -34,10 +41,7 @@ if(_thisDB isEqualTo "[1]" or _thisDB isEqualTo "[0,""Already Connected to Datab
 	"extDB3" callExtension "1:DEBUG:Issue opening ADD_DATABASE in setupDB.sqf";
 };
 
-_result
-
-
-
+_result;
 
 // thisDB - explained - DB declaration
 // 
