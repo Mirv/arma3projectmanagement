@@ -30,8 +30,8 @@ _weaponName = format ["'%1'", _weaponClass];
 _vehicleClass = (typeOf vehicle _player);
 _vehicleName = format ["'%1'", (getText (configFile >> "cfgVehicles" >> _vehicleClass >> "displayName"))];
 _vehicleClass = format ["'%1'", _vehicleClass ];
-_isVehicle =  !(isNull objectParent player); 
+_isVehicle =  (!(isNull objectParent player)); 
 
 result = [_weaponClass, _weaponName, _isVehicle, _vehicleClass, _vehicleName];
-
+systemChat (result joinString ", ");
 result;
