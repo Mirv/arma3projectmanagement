@@ -1,6 +1,9 @@
 //
-// - gatherKillInfo
+// - getKillInfo
 //		When called assembles all the event info regarding death caused by a player
+//
+// - call with: [<player1>, <player2>] mar_fnc_getKillInfo;
+// - test with:  [player, player] mar_fnc_getKillInfo;
 //
 // - Parameters
 //		Unit killed as object
@@ -15,40 +18,38 @@
 //		We don't test edge case where killer is blank
 //		We don't test edge case were instigator is not null object
 
-// Quickest fix is to assign the killer to instigator if it's blank before calling gather ... alternatively we drill down into param list testing again
-
-params [ "_unit", "_killer", ["_instigator", objNull] ];
+params [ "_unit", "_killer"];
 private [ "_result" ];
 
-// systemChat "Entering kill info";
 
-// We don't care about recording events unless it's a player
-// if(isPlayer _killer OR isPlayer _instigator) then {
-if(isPlayer _killer) then {
+// at this point we would check for instigator and then set killer to instigator
+// the drone check should handle if instigator is empty
+// _killer = [_killer, _instigator] call MAR_fnc_checkDroneKill;
 
-	// systemChat format["Instigator post adjustment ... %1", _instigator];
+// assemble it all
 
-	// at this point we would check for instigator and then set killer to instigator
-	// the drone check should handle if instigator is empty
-	// _killer = [_killer, _instigator] call MAR_fnc_checkDroneKill;
 
-	// assemble it all
 
-	// setup the identity of killed unit and killer (64bit steamUID, displayName, side Name)
-	_result = [ getPlayerUID _unit, name _unit, side _unit ];
-	_result append [ (getPlayerUID _killer), format ["'%1'", (name _killer)],  format ["'%1'", (side _killer)] ];
-	
-	// TODO - test wrapping call with ()
-	_result append ( [ _unit, _killer ] call MAR_fnc_getLocations );
-	_result append ( _killer call MAR_fnc_weaponNames);
-	_result pushback time;	
-};
+// setup the identity of killed unit (64bit steamUID, displayName, side Name)
+_result = [ 
+	// AI doesn't have a steamUID so 1 will be my flag in db to AI kill
+	if(isPLayer _unit) then {getPlayerUID _unit} else { 1 }, 
+	format ["'%1'", (name _unit)],  
+	format ["'%1'", (side _unit)] 
+];
 
-// systemChat (format ["In GKI - %1", (_result joinString " - ")] );
+// add killer (64bit steamUID, displayName, side Name)
+_result append [ (getPlayerUID _killer), format ["'%1'", (name _killer)],  format ["'%1'", (side _killer)] ];
+
+// add location (xyz coords / server / map / mission names)
+_result append ( [ _unit, _killer ] call MAR_fnc_getLocations );
+
+// add weaponry
+_result append ( _killer call MAR_fnc_getWeaponry);
+
+// add server time
+_result pushback time; 
 
 _result;
 
-// ["76561198010027779","=JpS=Raptor-Man","WEST","76561198010027779","=JpS=Raptor-Man","WEST","VR","mp_player_check","=JpS=Raptor-Man on DESKTOP-HP359LD",0,1840.59,5488.9,0.00143909,1840.59,5488.9,0.00143909,"'arifle_MXM_Hamr_LP_BI_F'","'MXM 6.5 mm'",false,"'None'","'None'",63.199]
-// ["76561198010027779","=JpS=Raptor-Man","'WEST'","76561198010027779","=JpS=Raptor-Man","'WEST'","'VR'","'mp_player_check'","'=JpS=Raptor-Man on DESKTOP-HP359LD'",1840.59,5488.9,0.00143909,1840.59,5488.9,0.00143909,0,"'arifle_MXM_Hamr_LP_BI_F'","'MXM 6.5 mm'",false,"'None'","'None'",53.015]
-// ["76561198010027779","=JpS=Raptor-Man","'WEST'","76561198010027779","=JpS=Raptor-Man","'WEST'","'VR'","'mp_player_check'","'=JpS=Raptor-Man on DESKTOP-HP359LD'",1840.59,5488.9,0.00143909,1840.59,5488.9,0.00143909,0,"'arifle_MXM_Hamr_LP_BI_F'","'MXM 6.5 mm'",false,"'None'","'None'",3.016]
-// ["76561198010027779","'=JpS=Raptor-Man'","'WEST'","76561198010027779","'=JpS=Raptor-Man'","'WEST'","'VR'","'__cur_mp'","'Test Server'",1840.59,5488.9,0.00143909,1840.59,5488.9,0.00143909,0,"'arifle_MXM_Hamr_LP_BI_F'","'MXM 6.5 mm'",false,"'None'","'None'",3.883]
+// output: ["76561198010027779","'=JpS=Raptor-Man'","'WEST'","76561198010027779","'=JpS=Raptor-Man'","'WEST'","'VR'","'__cur_mp'","'Test Server'",1836.74,5480.22,2.46744,1836.74,5480.22,2.46744,0,"'LMG_coax'","'Coaxial MG 7.62 mm'",true,"'B_MBT_01_cannon_F'","'M2A1 Slammer'",185.426]
