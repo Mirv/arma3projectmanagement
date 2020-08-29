@@ -5,3 +5,5 @@ class cfgFunctions
 {
   #include "functions\functions.hpp"
 };
+
+enableDebugConsole = 1;

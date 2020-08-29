@@ -7,8 +7,6 @@ params [ "_unit", "_killer"];
 
 private ["_myData", "_result" ];
 
-systemChat "execInsert!";
-
 _myData = [_unit, _killer] call mar_fnc_getKillInfo;
 _myData = [_myData] call mar_fnc_formatInsert;
 _myData = format ["2:myProtocol:%1", _myData];

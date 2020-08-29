@@ -11,25 +11,31 @@
 // TODO - Write a check to see that we can query against the list of database 
 //	tables in db extension? before we call this
 
-params ['_player'];
-
-
 private ["_thisDB", "_result", "_thisProtocol"];
 
 // DB declaration
 _thisDB = "extDB3" callExtension "9:ADD_DATABASE:jpsDB:myDB";
 
-// Attempt to create protocol handle to use for submitting queries
-_thisProtocol = "extDB3" callExtension "9:ADD_DATABASE_PROTOCOL:myDB:SQL:myProtocol";
-_result = _thisProtocol;
+if(_thisDB isEqualTo "[1]") then {
+	// Attempt to create protocol handle to use for submitting queries
+	_thisProtocol = "extDB3" callExtension "9:ADD_DATABASE_PROTOCOL:myDB:SQL:myProtocol";
 
-systemChat "DB adapter setting up.";
-"DB connect firing" call bis_fnc_log; // put something in arma rpt
-"extDB3" callExtension "9:ADD_PROTOCOL:LOG:DEBUG:debug";   // specific log file
-"extDB3" callExtension "1:DEBUG:Issue ADD_PROTOCOL in setupDB.sqf"; 	//  generalized log file
+	if(_thisProtocol isEqualTo "[1]") then {
+		_result = true;
+	} else {
+		_result = false;
+		diag_log "extDB3: Error with Database Connection.";
+		"extDB3" callExtension "9:ADD_PROTOCOL:LOG:DEBUG:debug";   // specific log file
+		"extDB3" callExtension "1:DEBUG:Issue ADD_PROTOCOL in connectDB.sqf"; 	//  generalized log file
+	};
+} else {
+	_result = false;
+	diag_log "extDB3: Error with Protocol - see extDB3 logs.";
+	"extDB3" callExtension "9:ADD_DATABASE:LOG:DEBUG:debug";   // specific log file
+	"extDB3" callExtension "1:DEBUG:Issue ADD_DATABASE in connectDB.sqf"; 	//  generalized log file
+};
 
 _result;
-
 
 // thisDB - explained - DB declaration
 // 
