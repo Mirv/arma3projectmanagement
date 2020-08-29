@@ -7,3 +7,4 @@ class cfgFunctions
 };
 
 enableDebugConsole = 1;
+allowFunctionsLog  = 1;
