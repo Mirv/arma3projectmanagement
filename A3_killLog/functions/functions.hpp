@@ -5,7 +5,7 @@ class MAR
   {
     file = "functions";
 
-    class addKillLogEH { Description = "Attach gatherKillInfo to Eventhandler"; };
+    class addKillLogEH { Description = "Attach gatherKillInfo to Eventhandler"; preInit = 1;};
     class checkDroneKill { Description = "Drones require a special check."; };    
     class connectDB { Description = "Create a handle to Connect to ExtDB for executing queries."; };
     class execInsert { Description = "Automatically the Kill Log insert query against database."; };
