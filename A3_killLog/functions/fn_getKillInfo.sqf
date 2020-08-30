@@ -47,7 +47,7 @@ _result append ( _killer call ELDB_fnc_getWeaponry);
 // add server time
 _result pushback time; 
 
-[_result] call bis_fnc_log;
+// [_result] call bis_fnc_log;
 
 _result;
 

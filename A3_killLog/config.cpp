@@ -20,10 +20,6 @@ class CfgPatches
 	};
 };
 
-// note we 
-// ...removed nesting
-// ...have no fn_ at front of class name ... yet
-// ... init became a fn_ in the filesystem
 #include "functions\functions.hpp"
 
 // #include "MemberList.hpp"

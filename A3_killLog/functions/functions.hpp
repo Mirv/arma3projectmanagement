@@ -40,7 +40,7 @@ class cfgFunctions
         Description = "Get array of the weapon class & name from the weapon config file & if it was vehicle kill.";
         file = "A3_killLog\functions\fn_getWeaponry.sqf" 
         };  
-      class init { 
+      class initServer { 
         preInit = 1; 
         Description = "Call the extDB initialization for protocol handle."; 
         file = "A3_killLog\functions\fn_init.sqf" 

@@ -20,6 +20,9 @@
 //      only the main turret captured currently
 //      This means that commander weaponry generally isn't captured
 //		We need both weapon & vehicle as shooting from truck bed
+//		Enemy bleeds out
+//		Enemy kiled by blast rather than direct hit of shell 
+//		Enemy killed by explosions on vehicles or vehicle fires
 //      
 //
 params ["_player"];

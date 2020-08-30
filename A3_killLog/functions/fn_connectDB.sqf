@@ -24,7 +24,7 @@ if(_thisDB isEqualTo "[1]") then {
 		_result = true;
 	} else {
 		_result = false;
-		diag_log "extDB3: Error with Database Connection.";
+		diag_log "extDB3: Error with Protocol Connection.";
 		"extDB3" callExtension "9:ADD_PROTOCOL:LOG:DEBUG:debug";   // specific log file
 		"extDB3" callExtension "1:DEBUG:Issue ADD_PROTOCOL in connectDB.sqf"; 	//  generalized log file
 	};
