@@ -39,10 +39,10 @@ _result = [
 ];
 
 // add location (xyz coords / server / map / mission names)
-_result append ( [ _unit, _killer ] call MAR_fnc_getLocations );
+_result append ( [ _unit, _killer ] call ELDB_fnc_getLocations );
 
 // add weaponry
-_result append ( _killer call MAR_fnc_getWeaponry);
+_result append ( _killer call ELDB_fnc_getWeaponry);
 
 // add server time
 _result pushback time; 

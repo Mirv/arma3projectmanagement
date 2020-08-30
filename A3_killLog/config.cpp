@@ -1,7 +1,7 @@
 #include "BIS_AddonInfo.hpp"
 class CfgPatches
 {
-	class AntistasiServerMembers
+	class ELDB
 	{
 		// Meta information for editor
 		name = "Event Logger To Database";
@@ -12,7 +12,7 @@ class CfgPatches
 		requiredVersion = 1; 
 		// Required addons, used for setting load order.
 		// When any of the addons is missing, pop-up warning will appear when launching the game.
-		requiredAddons[] = {@extDB3};
+		requiredAddons[] = {};
 		// List of objects (CfgVehicles classes) contained in the addon. Important also for Zeus content unlocking.
 		units[] = {};
 		// List of weapons (CfgWeapons classes) contained in the addon.
@@ -20,6 +20,10 @@ class CfgPatches
 	};
 };
 
+// note we 
+// ...removed nesting
+// ...have no fn_ at front of class name ... yet
+// ... init became a fn_ in the filesystem
 #include "functions\functions.hpp"
 
 // #include "MemberList.hpp"
