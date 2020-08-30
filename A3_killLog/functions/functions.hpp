@@ -13,5 +13,5 @@ class MAR
     class getKillInfo { Description = "Generates an array of information regarding kills by players."; };
     class getLocations { Description = "Get array of distance, target and killer 3 coord array."; };  
     class getWeaponry { Description = "Get array of the weapon class & name from the weapon config file & if it was vehicle kill."; };  
-  };
+
 };
