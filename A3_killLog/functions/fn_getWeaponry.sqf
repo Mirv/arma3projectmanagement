@@ -29,21 +29,21 @@ params ["_player"];
 
 private ["_weaponName", "_weaponClass", "_isVehicle", "_vehicleClass", "_vehicleName"];
 if (isNull objectParent player) then {
-	_weaponName = (currentWeapon vehicle _player); // can't string wrap this till after we get the nice name out
-	_weaponClass = format ["'%1'", (getText (configfile >> "CfgWeapons" >> _weaponName >> "displayName"))];	// Take the players vehicle main turrent currentWeapon
-	_weaponName = format ["'%1'", _weaponName];
-	_isVehicle =  true; 
-	_vehicleClass = (typeOf vehicle _player);
-	_vehicleName = format ["'%1'", (getText (configFile >> "cfgVehicles" >> _vehicleClass >> "displayName"))];
-	_vehicleClass = format ["'%1'", _vehicleClass ];	
-} else {
-
+	// something in this section breaks when not in vehicle
 	_weaponName = (currentWeapon _player); // can't string wrap this till after we get the nice name out
 	_weaponClass = format ["'%1'", (getText (configfile >> "CfgWeapons" >> _weaponName >> "displayName"))];	// Take the players vehicle main turrent currentWeapon
 	_weaponName = format ["'%1'", _weaponName];
 	_isVehicle =  false; 
 	_vehicleName = "'None'";
 	_vehicleClass = "'None'";
+} else {
+	_weaponName = (currentWeapon vehicle _player); // can't string wrap this till after we get the nice name out
+	_weaponClass = format ["'%1'", (getText (configfile >> "CfgWeapons" >> _weaponName >> "displayName"))];	// Take the players vehicle main turrent currentWeapon
+	_weaponName = format ["'%1'", _weaponName];
+	_isVehicle =  true; 
+	_vehicleClass = (typeOf vehicle _player);
+	_vehicleName = format ["'%1'", (getText (configFile >> "cfgVehicles" >> _vehicleClass >> "displayName"))];
+	_vehicleClass = format ["'%1'", _vehicleClass ];
 };
 result = [_weaponClass, _weaponName, _isVehicle, _vehicleClass, _vehicleName];
 // systemChat (result joinString ", ");
