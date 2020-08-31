@@ -7,7 +7,19 @@ params [ "_unit", "_killer"];
 
 private ["_myData", "_result" ];
 
-_myData = [_unit, _killer] call ELDB_fnc_getKillInfo;
+_myData = [_unit, _killer] call ELDB_fnc_getIdentities;
+
+// add location (xyz coords / server / map / mission names)
+_myData append ( [ _unit, _killer ] call ELDB_fnc_getLocations );
+
+// add weaponry
+_myData append ( _killer call ELDB_fnc_getWeaponry);
+
+// add server time
+_myData pushback time; 
+
+// "'VR'","'__cur_mp'","'Test Server'",1836.74,5480.22,2.46744,1836.74,5480.22,2.46744,0,"'LMG_coax'","'Coaxial MG 7.62 mm'",true,"'B_MBT_01_cannon_F'","'M2A1 Slammer'",185.426]
+
 _myData = [_myData] call ELDB_fnc_formatInsert;
 _myData = format ["2:myProtocol:%1", _myData];
 _result = "extDB3" callExtension _myData;
