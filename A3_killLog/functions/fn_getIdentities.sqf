@@ -38,17 +38,10 @@ _result = [
 	format ["'%1'", (side _killer)] 
 ];
 
-// add location (xyz coords / server / map / mission names)
-_result append ( [ _unit, _killer ] call ELDB_fnc_getLocations );
-
-// add weaponry
-_result append ( _killer call ELDB_fnc_getWeaponry);
-
-// add server time
-_result pushback time; 
 
 // [_result] call bis_fnc_log;
 
 _result;
 
-// output: ["76561198010027779","'=JpS=Raptor-Man'","'WEST'","76561198010027779","'=JpS=Raptor-Man'","'WEST'","'VR'","'__cur_mp'","'Test Server'",1836.74,5480.22,2.46744,1836.74,5480.22,2.46744,0,"'LMG_coax'","'Coaxial MG 7.62 mm'",true,"'B_MBT_01_cannon_F'","'M2A1 Slammer'",185.426]
+// output: ["76561198010027779","'=JpS=Raptor-Man'","'WEST'","76561198010027779","'=JpS=Raptor-Man'","'WEST'",
+

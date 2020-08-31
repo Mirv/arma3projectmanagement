@@ -28,7 +28,7 @@ class cfgFunctions
         Description = "Format for inserting to the killLog table."; 
         file = "A3_killLog\functions\fn_formatInsert.sqf"
         };    
-      class getKillInfo { 
+      class getIdentities { 
         Description = "Generates an array of information regarding kills by players."; 
         file = "A3_killLog\functions\fn_getKillInfo.sqf"
         };
