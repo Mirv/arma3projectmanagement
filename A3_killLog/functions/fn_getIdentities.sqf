@@ -38,10 +38,7 @@ _result = [
 	format ["'%1'", (side _killer)] 
 ];
 
-
-// [_result] call bis_fnc_log;
-
 _result;
 
-// output: ["76561198010027779","'=JpS=Raptor-Man'","'WEST'","76561198010027779","'=JpS=Raptor-Man'","'WEST'",
+// output: ["76561198010027779","'=JpS=Raptor-Man'","'WEST'","76561198010027779","'=JpS=Raptor-Man'","'WEST'"]
 

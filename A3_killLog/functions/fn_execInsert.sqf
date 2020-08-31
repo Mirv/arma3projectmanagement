@@ -7,8 +7,10 @@ params [ "_unit", "_killer"];
 
 private ["_myData", "_result" ];
 
+// get identity info for killed/killer
 _myData = [_unit, _killer] call ELDB_fnc_getIdentities;
 
+// appending allows us to maintain a flat array - since arma3 doesn't have flatten command
 // add location (xyz coords / server / map / mission names)
 _myData append ( [ _unit, _killer ] call ELDB_fnc_getLocations );
 

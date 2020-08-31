@@ -26,9 +26,10 @@
 //      
 //
 params ["_player"];
-
+diag_log _player;
+diag_log (isNull objectParent _player);
 private ["_weaponName", "_weaponClass", "_isVehicle", "_vehicleClass", "_vehicleName"];
-if (isNull objectParent player) then {
+if !(isNull objectParent _player) then {
 	// something in this section breaks when not in vehicle
 	_weaponName = (currentWeapon _player); // can't string wrap this till after we get the nice name out
 	_weaponClass = format ["'%1'", (getText (configfile >> "CfgWeapons" >> _weaponName >> "displayName"))];	// Take the players vehicle main turrent currentWeapon
@@ -36,6 +37,7 @@ if (isNull objectParent player) then {
 	_isVehicle =  false; 
 	_vehicleName = "'None'";
 	_vehicleClass = "'None'";
+	systemChat "Not in vehicle";
 } else {
 	_weaponName = (currentWeapon vehicle _player); // can't string wrap this till after we get the nice name out
 	_weaponClass = format ["'%1'", (getText (configfile >> "CfgWeapons" >> _weaponName >> "displayName"))];	// Take the players vehicle main turrent currentWeapon
