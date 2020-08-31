@@ -2,7 +2,7 @@ class cfgFunctions
 {
   class ELDB
   {
-    tag = "ELDB";
+    tag = "ELDB";  // this makes all fn_<fileName>.sqf accessible as ELBD_fnc_<filename>
     class functions
     {
       // didn't fully test this one ... stopped at 8 tests combined with placement of subdir, include style, functions.hpp in parent/sub
