@@ -21,5 +21,3 @@ SET WILDCARDS_PATH=%CD%\Wildcards.txt
 
 ::Call the Addon Builder
 %ADDON_BUILDER_PATH% "%SOURCE_PATH%" "%DEST_PATH%" -clear -include="%WILDCARDS_PATH%"
-
-pause

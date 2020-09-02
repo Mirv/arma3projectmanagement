@@ -7,16 +7,18 @@ params [ "_unit", "_killer"];
 
 private ["_myData", "_result" ];
 
+"----- in execInsert -----" call BIS_FNC_LOG;
 // get identity info for killed/killer
 _myData = [_unit, _killer] call ELDB_fnc_getIdentities;
-
+diag_log (format ["Insit Server %1", _myData]);
+"----- post identities - in execInsert -----" call BIS_FNC_LOG;
 // appending allows us to maintain a flat array - since arma3 doesn't have flatten command
 // add location (xyz coords / server / map / mission names)
 _myData append ( [ _unit, _killer ] call ELDB_fnc_getLocations );
-
+diag_log (format ["Insit Server %1", _myData]);
 // add weaponry
 _myData append ( _killer call ELDB_fnc_getWeaponry);
-
+diag_log _myData;
 // add server time
 _myData pushback time; 
 

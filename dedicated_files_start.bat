@@ -8,10 +8,5 @@
 
 xcopy "*.*" "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Server\mpmissions\mp_player_check.VR" /Y /S /I /U /D
 
-pause
-
-"C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Server\dedicated_test.bat"
-
-pause
 
 :: Note, after you're sure you're happy with it - comment out the pause or remove the pauses

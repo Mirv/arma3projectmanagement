@@ -41,7 +41,8 @@ class cfgFunctions
         file = "A3_killLog\functions\fn_getWeaponry.sqf" 
         };  
       class initServer { 
-        preInit = 1; 
+        // preInit = 1; 
+        preStart = 1;		// 1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
         Description = "Call the extDB initialization for protocol handle."; 
         file = "A3_killLog\functions\fn_init.sqf" 
       };  
