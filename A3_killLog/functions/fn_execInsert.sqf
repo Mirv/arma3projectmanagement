@@ -25,7 +25,9 @@ _myData pushback time;
 // "'VR'","'__cur_mp'","'Test Server'",1836.74,5480.22,2.46744,1836.74,5480.22,2.46744,0,"'LMG_coax'","'Coaxial MG 7.62 mm'",true,"'B_MBT_01_cannon_F'","'M2A1 Slammer'",185.426]
 
 _myData = [_myData] call ELDB_fnc_formatInsert;
+diag_log _myData;
 _myData = format ["2:myProtocol:%1", _myData];
+diag_log _myData;
 _result = "extDB3" callExtension _myData;
 
 _result;
