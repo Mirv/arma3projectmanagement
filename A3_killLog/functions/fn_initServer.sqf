@@ -7,10 +7,10 @@ private ["_result"];
 "[ELDB] Info: Kill Log: initserver.sqf reached" call BIS_FNC_LOG;
 if(isServer) then {
 	"[ELDB] Info: Kill Log: initserver's isServer confirmed." call BIS_FNC_LOG;
-	// Now it just types stuff into .rpt
-
 
 	// Connect to DB & assign protocol string for extDB3 to insert via
 	[] call ELDB_fnc_connectDB;
+
+	// Setup our event handler to fire
 	[] call ELDB_fnc_addKillLogEH;
 };

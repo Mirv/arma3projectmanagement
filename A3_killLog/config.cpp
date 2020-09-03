@@ -21,26 +21,3 @@ class CfgPatches
 };
 
 #include "functions\functions.hpp"
-
-// #include "MemberList.hpp"
-
-// class CfgFunctions
-// {
-//    class ASMS
-//    {
-// 	   class Functions
-// 	   {
-// 			tag = "ASMS";
-
-// 			class init
-// 			{
-// 				file = "AntistasiServerMembers\fn_init.sqf";
-// 				preInit = 1;
-// 			};
-// 			class onPlayerConnected
-// 			{
-// 				file = "AntistasiServerMembers\fn_onPlayerConnected.sqf";
-// 			};
-// 	   };
-//    };  
-// };
