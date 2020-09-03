@@ -1,5 +1,5 @@
-// - testEntireInsert
-//		mar_fnc_testEntireInsert
+// - execInsert
+//		
 //	- Notes
 //		Could extract which table is being inserted as variable
 //
@@ -7,27 +7,25 @@ params [ "_unit", "_killer"];
 
 private ["_myData", "_result" ];
 
-"----- in execInsert -----" call BIS_FNC_LOG;
 // get identity info for killed/killer
 _myData = [_unit, _killer] call ELDB_fnc_getIdentities;
-diag_log (format ["Insit Server %1", _myData]);
-"----- post identities - in execInsert -----" call BIS_FNC_LOG;
+
+// Senario info: island, mission, server names
+_myData append [format ["'%1'", worldName], format ["'%1'", missionName], format ["'%1'", serverName]];
+
 // appending allows us to maintain a flat array - since arma3 doesn't have flatten command
 // add location (xyz coords / server / map / mission names)
 _myData append ( [ _unit, _killer ] call ELDB_fnc_getLocations );
-diag_log (format ["Insit Server %1", _myData]);
+
 // add weaponry
 _myData append ( _killer call ELDB_fnc_getWeaponry);
-diag_log _myData;
+
 // add server time
 _myData pushback time; 
 
-// "'VR'","'__cur_mp'","'Test Server'",1836.74,5480.22,2.46744,1836.74,5480.22,2.46744,0,"'LMG_coax'","'Coaxial MG 7.62 mm'",true,"'B_MBT_01_cannon_F'","'M2A1 Slammer'",185.426]
-
+// format the query & call it
 _myData = [_myData] call ELDB_fnc_formatInsert;
-diag_log _myData;
 _myData = format ["2:myProtocol:%1", _myData];
-diag_log _myData;
 _result = "extDB3" callExtension _myData;
 
 _result;

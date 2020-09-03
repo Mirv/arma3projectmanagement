@@ -47,5 +47,7 @@ if (isNull objectParent _player) then {
 	_vehicleClass = format ["'%1'", _vehicleClass ];
 };
 result = [_weaponClass, _weaponName, _isVehicle, _vehicleClass, _vehicleName];
-// diag_log (result joinString ", ");
+
 result;
+
+// diag_log (result joinString ", ");

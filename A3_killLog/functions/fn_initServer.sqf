@@ -6,7 +6,7 @@
 private ["_result"];
 "[ELDB] Info: Kill Log: initserver.sqf reached" call BIS_FNC_LOG;
 if(isServer) then {
-	"[ELDB] Info: Kill Log: initserver's isServer confirmed true -----" call BIS_FNC_LOG;
+	"[ELDB] Info: Kill Log: initserver's isServer confirmed." call BIS_FNC_LOG;
 	// Now it just types stuff into .rpt
 
 
