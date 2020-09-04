@@ -7,24 +7,8 @@ params [ "_unit", "_killer"];
 
 private ["_myData", "_result" ];
 
-// get identity info for killed/killer
-_myData = [_unit, _killer] call ELDB_fnc_getIdentities;
-
-// Senario info: island, mission, server names
-_myData append [format ["'%1'", worldName], format ["'%1'", missionName], format ["'%1'", serverName]];
-
-// appending allows us to maintain a flat array - since arma3 doesn't have flatten command
-// add location (xyz coords / server / map / mission names)
-_myData append ( [ _unit, _killer ] call ELDB_fnc_getLocations );
-
-// add weaponry
-_myData append ( _killer call ELDB_fnc_getWeaponry);
-
-// add server time
-_myData pushback time; 
-
-// format the query & call it
-_myData = [_myData] call ELDB_fnc_formatInsert;
+_myData = [_unit, _killer] call mar_fnc_getKillInfo;
+_myData = [_myData] call mar_fnc_formatInsert;
 _myData = format ["2:myProtocol:%1", _myData];
 _result = "extDB3" callExtension _myData;
 

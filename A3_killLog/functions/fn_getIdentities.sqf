@@ -38,6 +38,17 @@ _result = [
 	format ["'%1'", (side _killer)] 
 ];
 
+// add location (xyz coords / server / map / mission names)
+_result append ( [ _unit, _killer ] call MAR_fnc_getLocations );
+
+// add weaponry
+_result append ( _killer call MAR_fnc_getWeaponry);
+
+// add server time
+_result pushback time; 
+
+[_result] call bis_fnc_log;
+
 _result;
 
 // output: ["76561198010027779","'=JpS=Raptor-Man'","'WEST'","76561198010027779","'=JpS=Raptor-Man'","'WEST'"]

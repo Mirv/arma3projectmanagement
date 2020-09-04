@@ -1,9 +1,7 @@
 
 addMissionEventHandler ["EntityKilled",{
 	params ["_unit", "_killer", "_instigator"];
-	if(isPLayer _killer) then {
-		[ _unit, _killer ] call ELDB_fnc_execInsert;
-	};
+	[ _unit, _killer ] call MAR_fnc_execInsert;
 }];
 
 

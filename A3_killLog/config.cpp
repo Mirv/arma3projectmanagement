@@ -1,7 +1,7 @@
 #include "BIS_AddonInfo.hpp"
 class CfgPatches
 {
-	class ELDB
+	class AntistasiServerMembers
 	{
 		// Meta information for editor
 		name = "Event Logger To Database";
@@ -12,7 +12,7 @@ class CfgPatches
 		requiredVersion = 1; 
 		// Required addons, used for setting load order.
 		// When any of the addons is missing, pop-up warning will appear when launching the game.
-		requiredAddons[] = {};
+		requiredAddons[] = {@extDB3};
 		// List of objects (CfgVehicles classes) contained in the addon. Important also for Zeus content unlocking.
 		units[] = {};
 		// List of weapons (CfgWeapons classes) contained in the addon.
@@ -20,15 +20,17 @@ class CfgPatches
 	};
 };
 
-class cfgFunctions
-{
-  class ELDB
-  {
-    tag = "ELDB";  // this makes all fn_<fileName>.sqf accessible as ELBD_fnc_<filename>
-    class functions
-    {
-      // didn't fully test this one ... stopped at 8 tests combined with placement of subdir, include style, functions.hpp in parent/sub
-      // file = "functions";
+#include "functions\functions.hpp"
+
+// #include "MemberList.hpp"
+
+// class CfgFunctions
+// {
+//    class ASMS
+//    {
+// 	   class Functions
+// 	   {
+// 			tag = "ASMS";
 
       class addKillLogEH { 
         Description = "Attach gatherKillInfo to Eventhandler";
