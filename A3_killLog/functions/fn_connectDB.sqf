@@ -24,11 +24,13 @@ if(_thisDB isEqualTo "[1]") then {
 		_result = true;
 	} else {
 		_result = false;
+		diag_log "extDB3: Error with Database Connection.";
 		"extDB3" callExtension "9:ADD_PROTOCOL:LOG:DEBUG:debug";   // specific log file
 		"extDB3" callExtension "1:DEBUG:Issue ADD_PROTOCOL in connectDB.sqf"; 	//  generalized log file
 	};
 } else {
 	_result = false;
+	diag_log "extDB3: Error with Protocol - see extDB3 logs.";
 	"extDB3" callExtension "9:ADD_DATABASE:LOG:DEBUG:debug";   // specific log file
 	"extDB3" callExtension "1:DEBUG:Issue ADD_DATABASE in connectDB.sqf"; 	//  generalized log file
 };

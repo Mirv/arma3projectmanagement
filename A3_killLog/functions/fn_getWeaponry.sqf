@@ -20,34 +20,28 @@
 //      only the main turret captured currently
 //      This means that commander weaponry generally isn't captured
 //		We need both weapon & vehicle as shooting from truck bed
-//		Enemy bleeds out
-//		Enemy kiled by blast rather than direct hit of shell 
-//		Enemy killed by explosions on vehicles or vehicle fires
 //      
 //
 params ["_player"];
 
 private ["_weaponName", "_weaponClass", "_isVehicle", "_vehicleClass", "_vehicleName"];
-if (isNull objectParent _player) then {
-	// something in this section breaks when not in vehicle
-	_weaponName = (currentWeapon _player); // can't string wrap this till after we get the nice name out
-	_weaponClass = format ["'%1'", (getText (configfile >> "CfgWeapons" >> _weaponName >> "displayName"))];	// Take the players vehicle main turrent currentWeapon
-	_weaponName = format ["'%1'", _weaponName];
-	_isVehicle =  false; 
-	_vehicleName = "'None'";
-	_vehicleClass = "'None'";
-	systemChat "Not in vehicle";
-} else {
+if (isNull objectParent player) then {
 	_weaponName = (currentWeapon vehicle _player); // can't string wrap this till after we get the nice name out
 	_weaponClass = format ["'%1'", (getText (configfile >> "CfgWeapons" >> _weaponName >> "displayName"))];	// Take the players vehicle main turrent currentWeapon
 	_weaponName = format ["'%1'", _weaponName];
 	_isVehicle =  true; 
 	_vehicleClass = (typeOf vehicle _player);
 	_vehicleName = format ["'%1'", (getText (configFile >> "cfgVehicles" >> _vehicleClass >> "displayName"))];
-	_vehicleClass = format ["'%1'", _vehicleClass ];
+	_vehicleClass = format ["'%1'", _vehicleClass ];	
+} else {
+
+	_weaponName = (currentWeapon _player); // can't string wrap this till after we get the nice name out
+	_weaponClass = format ["'%1'", (getText (configfile >> "CfgWeapons" >> _weaponName >> "displayName"))];	// Take the players vehicle main turrent currentWeapon
+	_weaponName = format ["'%1'", _weaponName];
+	_isVehicle =  false; 
+	_vehicleName = "'None'";
+	_vehicleClass = "'None'";
 };
 result = [_weaponClass, _weaponName, _isVehicle, _vehicleClass, _vehicleName];
-
+// systemChat (result joinString ", ");
 result;
-
-// diag_log (result joinString ", ");

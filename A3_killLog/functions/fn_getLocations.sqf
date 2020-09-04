@@ -11,17 +11,27 @@
 params ["_killed", "_killer"];
 
 private [
+	"_currentMap",
+	"_currentMission",
+	"_currentServerName",
 	"_killedPos",
 	"_killerPos",
 	"_killDistance",
 	"_result"
 ];
 
+_currentMap = format ["'%1'", worldName];
+_currentMission = format ["'%1'", missionName];
+_currentServerName = format ["'%1'", serverName];
 _killedPos = getPos _killed;
 _killerPos = getPos _killer;
 _killDistance = _killedPos distance _killerPos;
 
-_result = [];
+_result = [	
+	_currentMap,
+	_currentMission,
+	_currentServerName
+];
 
 // append arrays, rather than hand type it into result array so it's a flat file & pushback to keep the array order
 _result append _killedPos;
