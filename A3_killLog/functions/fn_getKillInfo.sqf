@@ -26,29 +26,28 @@ private [ "_result" ];
 // the drone check should handle if instigator is empty
 // _killer = [_killer, _instigator] call MAR_fnc_checkDroneKill;
 
+
+// Gather all the data
+// First func is assigned, rest are appended to keep the array flat
+
 // setup the identity of killed unit (64bit steamUID, displayName, side Name)
-_result = [ 
-	// AI doesn't have a steamUID so 1 will be my flag in db to AI kill
-	if(isPLayer _unit) then {getPlayerUID _unit} else { 1 }, 
-	format ["'%1'", (name _unit)],  
-	format ["'%1'", (side _unit)],
-	// adding the killer info now - this will always be a player
-	(getPlayerUID _killer), 
-	format ["'%1'", (name _killer)],  
-	format ["'%1'", (side _killer)] 
-];
+_result = [_unit, _killer] call ELDB_fnc_getIdentities;
+
+// get map/mission/server names
+_result append ([] call ELDB_fnc_getSenario);
 
 // add location (xyz coords / server / map / mission names)
-_result append ( [ _unit, _killer ] call ELDB_fnc_getLocations );
+_result append ([ _unit, _killer ] call ELDB_fnc_getLocations);
 
 // add weaponry
-_result append ( _killer call ELDB_fnc_getWeaponry);
+_result append ([_killer] call ELDB_fnc_getWeaponry);
+// [_result] call bis_fnc_log;
 
 // add server time
 _result pushback time; 
 
-[_result] call bis_fnc_log;
+// [_result] call bis_fnc_log;
 
 _result;
 
-// output: ["76561198010027779","'=JpS=Raptor-Man'","'WEST'","76561198010027779","'=JpS=Raptor-Man'","'WEST'","'VR'","'__cur_mp'","'Test Server'",1836.74,5480.22,2.46744,1836.74,5480.22,2.46744,0,"'LMG_coax'","'Coaxial MG 7.62 mm'",true,"'B_MBT_01_cannon_F'","'M2A1 Slammer'",185.426]
+// output: ["1","'Blah'","'WEST'","2","'Dude #2'","'WEST'","'VR'","'__cur_mp'","'Test Server'",1836.74,5480.22,2.46744,1836.74,5480.22,2.46744,0,"'LMG_coax'","'Coaxial MG 7.62 mm'",true,"'B_MBT_01_cannon_F'","'M2A1 Slammer'",185.426]
